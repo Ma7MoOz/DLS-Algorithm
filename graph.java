@@ -22,7 +22,7 @@ class Graph {
 void createGraph() 
         { 
 int n, i, j, parent, adj_parent, initial_node;
-        int ans = 0,ans1 = 0;
+        int ans = 0,ans1 = 0, lvl=0;
         System.out.print("\nEnter total number elements in a Undirected Graph :"); 
         n = getNumber();
          for (i = 1; i <= n; i++) 
@@ -48,15 +48,25 @@ int n, i, j, parent, adj_parent, initial_node;
                 System.out.print("\nContinue to add adjacent node for " + parent + "(1/0)?");
                 ans1 = getNumber();
             
-            } while (ans1 == 1);
-            System.out.print("\nContinue to add graph node?");
-            ans = getNumber();
-        
-        }while (ans == 1);
-         System.out.print("\nAdjacency matrix for your graph is :\n");
-        for (i = 1; i <= n; i++) {
+            } 
             
-                for (j = 1; j <= n; j++) 
+            while (ans1 == 1);
+            System.out.print("\nContinue to add graph node (1/0)?");
+            ans = getNumber();
+        }
+        
+        
+        
+        
+        
+        
+        while (ans == 1);
+        System.out.print("\n what's the level of rows you want to atchieve ??");
+            lvl = getNumber();
+         System.out.print("\nAdjacency matrix for your graph is :\n");
+        for (i = 1; i <= lvl; i++) {
+            
+                for (j = 1; j <= lvl; j++) 
                           
            System.out.print(" " + adj[i][j]);
             System.out.print("\n");
@@ -64,7 +74,7 @@ int n, i, j, parent, adj_parent, initial_node;
         } 
 
 System.out.println("\nYour Undirected Graph is :");
-        for (i = 1; i <= n; i++) {
+        for (i = 1; i <= lvl; i++) {
 System.out.print("\nVertex " + i + " is connected to : ");
             for (j = 1; j <= n; j++) 
             { 
@@ -76,45 +86,43 @@ System.out.print("\nVertex " + i + " is connected to : ");
         } 
 System.out.println("\nEnter the initial node for BFS traversal:");
         initial_node = getNumber();
-        DLS(initial_node, n);
+        DFS(initial_node, n);
     
 
     } 
 
 
-void DLS(int initial_node, int n) {
-        int u, i;
-        s.top = -1 ;
-        int level = 0 ;
+void DFS(int initial_node, int n) 
+        { 
+         int u, i;
+        s.top = -1;
         s.push(initial_node);
-        System.out.println("\nDLS traversal for given graph is : ");
+        System.out.println("\nDFS traversal for given graph is : ");
         while (!s.isempty()) {
+ 
             u = s.pop();
-            level--;
-            if (visited[u] == 0) 
-            {
-                System.out.print("\n" + u);
-                visited[u] = 1;
-            }
+            if (visited[u] == 0)            
+                { 
+               System.out.print("\n" + u);
+               visited[u] = 1;
+            } 
+for (i = 1; i <= n; i++)            
+                { 
+if ((adj[u][i] == 1) && (visited[i] == 0))                 
+                    { 
+s.push(u);
+visited[i] = 1;
+System.out.print(" " + i);
+u = i;
                 
-             for (i = 1; i <= n; i++) 
-             {
-                    if ((adj[u][i] == 1) && (visited[i] == 0)) {
-                        s.push(u);
-                        visited[i] = 1;
-                        level++;
-                        if (level >= 2) 
-                        {
-                            break;
-                        } else {
-                            System.out.print(" " + i);
-                            u = i;
-                        }
-                    }
+} 
             
-            }
-            }
-    }/*  end of DFS function  */
+} 
+        
+} 
+    
+
+}/*  end of DFS function  */ 
 
 
 
@@ -136,3 +144,5 @@ System.out.println("I/O Error");
 return ne;
         } 
 } 
+
+
